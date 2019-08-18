@@ -25,7 +25,7 @@ t_word			*ft_fill_word(char *number, char *number_str)
 
 	word = malloc(sizeof(t_word));
 	word->n = ft_atoi(number);
-	word->word = ft_strdup(number_str);
+	word->word = ft_strdup(ft_trim_begin(number_str));
 	(void)word;
 	(void)number;
 	(void)number_str;
@@ -152,33 +152,40 @@ unsigned int				ft_pow(unsigned int nb, unsigned int pow)
 		return nb * ft_pow(nb, pow - 1);
 }
 
-void					reccursive_int_cvt(unsigned int number, t_dictionary *dict)
+void					reccursive_int_cvt(unsigned int number, t_dictionary *dict, unsigned int deep)
 {
-	short			digit;
-	short			ten_pow;
-	unsigned int	got;
+	t_word		*last_word;
+	last_word	= dict->words[dict->size - 1 - deep];
+	t_word		*current_word;
 
-	if (number < 10)
+	if (deep >= dict->size || number == 0)
 	{
-		ft_putstr(get_word(number, dict)->word);
-		return ;	
+		return ;
 	}
-	
-	digit = find_first_digit(number);
-	ft_putstr(get_word(digit, dict)->word);
-	
-	ten_pow = find_ten_pow(number) ;
-	
-	got = digit * ft_pow(10, ten_pow);
-	printf("%s\n", get_word(got, dict)->word);
-	
-	reccursive_int_cvt(number  - got, dict);
+	current_word = get_word(number, dict);
+	if (current_word > 0)
+	{
+		ft_putstr(current_word->word);
+		return ;
+	}
+	else if (number / last_word->n > 0)
+	{
+		reccursive_int_cvt(number / last_word->n, dict, deep + 1);
+		write(1, "-", 1);
+		ft_putstr(last_word->word);
+		write(1, " ", 1);
+		reccursive_int_cvt(number % last_word->n, dict, deep + 1);
+	}
+	else
+	{
+		reccursive_int_cvt(number, dict, deep + 1);
+	}
 }
 
 void			ft_display_number(unsigned int number, char *dictionary_path)
 {
 	t_dictionary	dict;
 
-	dict = ft_fill_dictionary(dictionary_path);	
-	reccursive_int_cvt(number, &dict);	
+	dict = ft_fill_dictionary(dictionary_path);
+	reccursive_int_cvt(number, &dict, 0);
 }
