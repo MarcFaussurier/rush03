@@ -168,10 +168,13 @@ void					reccursive_int_cvt(unsigned int number, t_dictionary *dict, unsigned in
 		ft_putstr(current_word->word);
 		return ;
 	}
-	else if (number / last_word->n > 0)
+	else if (number / last_word->n > 0 && last_word->n % 10 == 0)
 	{
-		reccursive_int_cvt(number / last_word->n, dict, deep + 1);
-		write(1, "-", 1);
+		if (last_word->n / 10 >= 10)
+		{	
+			reccursive_int_cvt(number / last_word->n, dict, deep);
+		}
+		write(1, " ", 1);
 		ft_putstr(last_word->word);
 		write(1, " ", 1);
 		reccursive_int_cvt(number % last_word->n, dict, deep + 1);
