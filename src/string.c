@@ -45,16 +45,12 @@ int			ft_is_number(char c)
 unsigned long		ft_atoi(char *nbr)
 {
 	unsigned long		out;
-	unsigned int		is_negative;
 
-	is_negative = 0;
 	out = 0;
 	nbr = ft_trim_begin(nbr) - 1;
-	if (*(nbr + 1) == '-')
-		is_negative = ((char)(++nbr) * 0)  + 1;
 	while (*++nbr && ft_is_number(*nbr))
 		out = (out + *nbr - '0') * (ft_is_number(*(nbr + 1)) ? 10 : 1);
-	return (is_negative ? -1 * out : out);
+	return (out);
 }
 
 int			ft_is_space(char c)

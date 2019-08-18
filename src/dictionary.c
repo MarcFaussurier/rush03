@@ -44,6 +44,7 @@ t_dictionary	ft_fill_dictionary(char *dictionary_path)
 	int				word_buffer_size;
 	int				waiting_number;
 	dict.size 	= 0;
+	waiting_number = 1;
 	dict.words 	= malloc(sizeof(t_word));
 	file_buffer = 0;
 	word_buffer_size = 0;
@@ -76,8 +77,6 @@ t_dictionary	ft_fill_dictionary(char *dictionary_path)
 				dict.words = realloc(dict.words, (dict.size + 1) * sizeof (t_word*));
 				dict.words[dict.size - 1] = current_word;
 				number_buffer_size = 0;
-				free(number_buffer);
-				//free(word_buffer);
 				number_buffer = malloc(sizeof(char));
 				word_buffer = malloc(sizeof(char));
 				word_buffer_size = 0;
@@ -159,9 +158,7 @@ void					reccursive_int_cvt(unsigned long number, t_dictionary *dict, unsigned i
 	t_word		*current_word;
 
 	if (number == 0)
-	{
 		return ;
-	}
 	current_word = get_word(number, dict);
 	if (current_word > 0)
 	{
@@ -190,5 +187,8 @@ void			ft_display_number(unsigned long number, char *dictionary_path)
 	t_dictionary	dict;
 
 	dict = ft_fill_dictionary(dictionary_path);
-	reccursive_int_cvt(number, &dict, 0);
+	if (number == 0)
+		ft_putstr(get_word(0, &dict)->word);
+	else
+		reccursive_int_cvt(number, &dict, 0);
 }
