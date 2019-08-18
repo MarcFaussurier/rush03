@@ -14,10 +14,10 @@
 #ifndef STRING_H
 # define STRING_H
 
-char	*ft_strdup(char *str);
-int		ft_atoi(char *nbr);
-char	*ft_trim_begin(char *str);
-int		ft_is_number(char c);
-int		ft_is_space(char c);
+char			*ft_strdup(char *str);
+unsigned long		ft_atoi(char *nbr);
+char			*ft_trim_begin(char *str);
+int			ft_is_number(char c);
+int			ft_is_space(char c);
 
 #endif

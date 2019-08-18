@@ -107,7 +107,7 @@ t_dictionary	ft_fill_dictionary(char *dictionary_path)
 }
 
 
-t_word			*get_word(unsigned int	number, t_dictionary *dict)
+t_word			*get_word(unsigned long	number, t_dictionary *dict)
 {
 	unsigned int		i;
 
@@ -126,7 +126,7 @@ t_word			*get_word(unsigned int	number, t_dictionary *dict)
 
 #include <stdio.h>
 
-unsigned int				find_ten_pow(unsigned int nb)
+unsigned long				find_ten_pow(unsigned long nb)
 {
 	if (nb == 0)
 		return 0;
@@ -134,7 +134,7 @@ unsigned int				find_ten_pow(unsigned int nb)
 		return 1 + find_ten_pow(nb / 10);
 }
 
-unsigned int				find_first_digit(unsigned int nb)
+unsigned long				find_first_digit(unsigned long nb)
 {
 	if (nb / 10 < 10)
 		return nb / 10;
@@ -142,7 +142,7 @@ unsigned int				find_first_digit(unsigned int nb)
 		return find_first_digit(nb / 10);
 }
 
-unsigned int				ft_pow(unsigned int nb, unsigned int pow)
+unsigned long				ft_pow(unsigned long nb, unsigned int pow)
 {
 	if (pow == 0)
 		return (1);
@@ -152,13 +152,13 @@ unsigned int				ft_pow(unsigned int nb, unsigned int pow)
 		return nb * ft_pow(nb, pow - 1);
 }
 
-void					reccursive_int_cvt(unsigned int number, t_dictionary *dict, unsigned int deep)
+void					reccursive_int_cvt(unsigned long number, t_dictionary *dict, unsigned int deep)
 {
 	t_word		*last_word;
 	last_word	= dict->words[dict->size - 1 - deep];
 	t_word		*current_word;
 
-	if (deep >= dict->size || number == 0)
+	if (number == 0)
 	{
 		return ;
 	}
@@ -177,7 +177,7 @@ void					reccursive_int_cvt(unsigned int number, t_dictionary *dict, unsigned in
 		}
 		ft_putstr(last_word->word);
 		write(1, " ", 1);
-		reccursive_int_cvt(number % last_word->n, dict, deep + 1);
+		reccursive_int_cvt(number % last_word->n, dict, deep);
 	}
 	else
 	{
@@ -185,7 +185,7 @@ void					reccursive_int_cvt(unsigned int number, t_dictionary *dict, unsigned in
 	}
 }
 
-void			ft_display_number(unsigned int number, char *dictionary_path)
+void			ft_display_number(unsigned long number, char *dictionary_path)
 {
 	t_dictionary	dict;
 

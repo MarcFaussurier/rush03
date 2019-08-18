@@ -14,7 +14,7 @@
 #include <unistd.h>
 #include <stdlib.h>
 
-char	*ft_strdup(char *str)
+char			*ft_strdup(char *str)
 {
 	unsigned int	len;
 	char		*out;
@@ -29,7 +29,7 @@ char	*ft_strdup(char *str)
 	return (str - len);
 }
 
-char	*ft_trim_begin(char *str)
+char			*ft_trim_begin(char *str)
 {
 	str -= 1;
 	while (*++str && ((*str <= '\r' && *str >= 'r') || *str == ' '))
@@ -37,15 +37,15 @@ char	*ft_trim_begin(char *str)
 	return (str);
 }
 
-int	ft_is_number(char c)
+int			ft_is_number(char c)
 {
 	return (c >= '0' && c <= '9');
 }
 
-int	ft_atoi(char *nbr)
+unsigned long		ft_atoi(char *nbr)
 {
-	int		out;
-	unsigned int	is_negative;
+	unsigned long		out;
+	unsigned int		is_negative;
 
 	is_negative = 0;
 	out = 0;
@@ -57,7 +57,7 @@ int	ft_atoi(char *nbr)
 	return (is_negative ? -1 * out : out);
 }
 
-int		ft_is_space(char c)
+int			ft_is_space(char c)
 {
 	return (c == ' ' || (c >= '\t' && c <= '\r'));
 }

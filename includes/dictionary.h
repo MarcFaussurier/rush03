@@ -16,14 +16,14 @@
 
 typedef  struct	s_word 
 {
-	unsigned int		n;
-	char				*word;
+	unsigned long		n;
+	char			*word;
 } t_word;
 
 typedef struct	s_dictionary
 {
 	unsigned int		size;
-	t_word				**words;
+	t_word			**words;
 }				t_dictionary;
 
 typedef enum	e_suported_langs 
@@ -35,8 +35,8 @@ typedef enum	e_suported_langs
 
 t_word			*ft_fill_word(char *number, char *number_str);
 
-t_dictionary	ft_fill_dictionary(char *dictionary_path);
+t_dictionary		ft_fill_dictionary(char *dictionary_path);
 
-void			ft_display_number(unsigned int number, char *dictionary_path);
+void			ft_display_number(unsigned long number, char *dictionary_path);
 
 #endif
